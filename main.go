@@ -3,6 +3,8 @@ package main
 import (
 	"parsing-template/model"
 	"parsing-template/utils"
+
+	"github.com/mect/go-escpos"
 )
 
 func main() {
@@ -21,4 +23,20 @@ func main() {
 		panic(err)
 	}
 	// fmt.Println(dataReceipt.Output())
+
+	p, err := escpos.NewUSBPrinterByPath("") // empry string will do a self discovery
+	if err != nil {
+		panic(err)
+	}
+
+	p.Init()
+	p.PrintLn(receiptStr)
+	p.Cut()
+	p.End()
+	// // Write buffer content to a file for review
+	// if err := os.WriteFile("data/output/output.txt", buf.Bytes(), 0644); err != nil {
+	// 	panic(err)
+	// }
+
+	// fmt.Println("Print simulation saved to output.txt")
 }

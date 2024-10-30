@@ -23,8 +23,9 @@ func Parsing(template string, ticket model.Ticket, date, timeStr string) string 
 		paymentStr += fmt.Sprintf("Tendered    :   %s\n", payment.Name)
 		paymentStr += fmt.Sprintf("Change      :   %s\n", payment.Tendered)
 		paymentStr += fmt.Sprintf("RefNo       :   %d\n", payment.PaymentInformation.RefNo)
+		paymentStr += "\n"
 	}
-	result = strings.ReplaceAll(result, "#Ticket.Payments#", paymentStr)
+	result = strings.ReplaceAll(result, "##Ticket.Payments##", paymentStr)
 	result = strings.ReplaceAll(result, "Tendered    :   {Payments.Name}", "")
 	result = strings.ReplaceAll(result, "Change      :   {Payments.Tendered}", "")
 	result = strings.ReplaceAll(result, "RefNo       :   {Payments.PaymentInformation!RefNo}", "")
@@ -34,7 +35,7 @@ func Parsing(template string, ticket model.Ticket, date, timeStr string) string 
 	for _, order := range ticket.Orders {
 		orderStr += fmt.Sprintf("Name %s [=%s] [=%s]\n", order.Name, order.Quantity, order.Price)
 	}
-	result = strings.ReplaceAll(result, "#Ticket.Orders#", orderStr)
+	result = strings.ReplaceAll(result, "##Ticket.Orders##", orderStr)
 
 	return result
 }

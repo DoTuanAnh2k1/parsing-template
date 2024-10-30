@@ -1,15 +1,24 @@
 package main
 
 import (
-	"fmt"
-	"parsing-template/data"
 	"parsing-template/model"
-	"parsing-template/parsing"
+	"parsing-template/utils"
 )
 
 func main() {
-	dataTicket := model.NewData()
-	fmt.Println(dataTicket)
-	parsingRes := parsing.Parsing(data.Template, dataTicket, "01-01-1970", "Monday")
-	fmt.Println(parsingRes)
+	// dataTicket := model.NewData()
+	// fmt.Println(dataTicket)
+	// parsingRes := parsing.Parsing(data.Template, dataTicket, "01-01-1970", "Monday")
+	// fmt.Println(parsingRes)
+	// for i := 0; i < 52; i++ {
+	// 	fmt.Printf(" ")
+	// }
+
+	dataReceipt := model.NewReceipt()
+	receiptStr := dataReceipt.Output()
+	err := utils.WriteToFile("data/output/receipt.txt", receiptStr)
+	if err != nil {
+		panic(err)
+	}
+	// fmt.Println(dataReceipt.Output())
 }

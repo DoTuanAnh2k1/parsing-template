@@ -18,5 +18,5 @@ Tendered    :   {Payments.Name}
 Change      :   {Payments.Tendered}
 RefNo       :   {Payments.PaymentInformation!RefNo}
 
-##Tickets.Order##
+##Ticket.Orders##
 Name {Orders.Name} [=FormatDecimal({Orders.Quantity},2)] [=FormatDecimal({Orders.Price},2)]`

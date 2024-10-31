@@ -6,11 +6,11 @@
 <C>TEL : 6226 2562
 <F>-
 <C10>Receipt No: {TICKET NO}
-<J00>Date: |{DATE} {TIME}
+<J00>Date: | {DATE} {TIME}
 
 {ENTITIES}
 <F>-
-<J00> Qty | Items | Price | Amount
+<J00> Qty Items | Price Amount
 {ORDERS}
 <F>=
 

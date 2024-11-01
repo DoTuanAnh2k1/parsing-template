@@ -30,6 +30,6 @@ type PaymentInfo struct {
 
 type Order struct {
 	Name     string
-	Quantity string
-	Price    string
+	Quantity int
+	Price    float64
 }

@@ -36,13 +36,13 @@ func NewTicket() Ticket {
 		Orders: []Order{
 			{
 				Name:     utils.StringRandom(10),
-				Quantity: utils.StringRandom(10),
-				Price:    utils.StringRandom(10),
+				Quantity: 1,
+				Price:    3.99,
 			},
 			{
 				Name:     utils.StringRandom(10),
-				Quantity: utils.StringRandom(10),
-				Price:    utils.StringRandom(10),
+				Quantity: 1,
+				Price:    3.99,
 			},
 		},
 	}

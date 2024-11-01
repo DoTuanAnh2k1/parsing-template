@@ -7,8 +7,15 @@ import (
 )
 
 func Parsing(template string, ticket model.Ticket, date, timeStr string) string {
-	// Replace simple fields
 	result := template
+
+	// Delete some fields
+	result = strings.ReplaceAll(result, "Tendered    :   {Payments.Name}", "")
+	result = strings.ReplaceAll(result, "Change      :   {Payments.Tendered}", "")
+	result = strings.ReplaceAll(result, "RefNo       :   {Payments.PaymentInformation!RefNo}", "")
+	result = strings.ReplaceAll(result, "Name {Orders.Name} [=FormatDecimal({Orders.Quantity},2)] [=FormatDecimal({Orders.Price},2)]", "")
+
+	// Replace simple fields of ticket
 	result = strings.ReplaceAll(result, "{Ticket.Terminal}", ticket.Terminal)
 	result = strings.ReplaceAll(result, "{LoginUser}", ticket.Cashier)
 	result = strings.ReplaceAll(result, "{Date}", date)
@@ -16,6 +23,7 @@ func Parsing(template string, ticket model.Ticket, date, timeStr string) string 
 	result = strings.ReplaceAll(result, "{Ticket.PaymentDate}", ticket.PaymentDate.Format("2006-01-02"))
 	result = strings.ReplaceAll(result, "{Ticket.PaymentTime}", ticket.PaymentDate.Format("15:04:05"))
 	result = strings.ReplaceAll(result, "{Ticket.Tag!Pax}", fmt.Sprintf("%d", ticket.Tag.Pax))
+	result = strings.ReplaceAll(result, "{Tikcet.Tag|PaxTime}", ticket.Tag.PaxTime.Format("2006-01-02 15:04:05"))
 
 	// Replace Payments
 	paymentStr := ""
@@ -26,14 +34,11 @@ func Parsing(template string, ticket model.Ticket, date, timeStr string) string 
 		paymentStr += "\n"
 	}
 	result = strings.ReplaceAll(result, "##Ticket.Payments##", paymentStr)
-	result = strings.ReplaceAll(result, "Tendered    :   {Payments.Name}", "")
-	result = strings.ReplaceAll(result, "Change      :   {Payments.Tendered}", "")
-	result = strings.ReplaceAll(result, "RefNo       :   {Payments.PaymentInformation!RefNo}", "")
 
 	// Replace Orders
 	orderStr := ""
 	for _, order := range ticket.Orders {
-		orderStr += fmt.Sprintf("Name %s [=%s] [=%s]\n", order.Name, order.Quantity, order.Price)
+		orderStr += fmt.Sprintf("Name %s [%d] [%0.2f]\n", order.Name, order.Quantity, order.Price)
 	}
 	result = strings.ReplaceAll(result, "##Ticket.Orders##", orderStr)
 

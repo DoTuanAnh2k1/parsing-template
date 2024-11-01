@@ -26,3 +26,6 @@ go.sum
 
 # env file
 .env
+
+# main build
+main

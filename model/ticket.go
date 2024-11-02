@@ -4,7 +4,7 @@ import "time"
 
 type Ticket struct {
 	Terminal    string
-	Cashier     string // Doen't require
+	Cashier     string // Doesn't require
 	PaymentDate time.Time
 	PaymentType string
 	Tag         Tag
@@ -30,6 +30,6 @@ type PaymentInfo struct {
 
 type Order struct {
 	Name     string
-	Quantity int
-	Price    float64
+	Quantity string
+	Price    string
 }

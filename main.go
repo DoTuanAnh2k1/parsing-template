@@ -1,15 +1,13 @@
 package main
 
 import (
-	"fmt"
-	"parsing-template/data"
 	"parsing-template/model"
 	"parsing-template/parsing"
 )
 
 func main() {
 	dataTicket := model.NewTicket()
-	// fmt.Println(dataTicket)
-	parsingRes := parsing.Parsing(data.Template, dataTicket, "01-01-1970", "Monday")
-	fmt.Println(parsingRes)
+	inputFile := "data/template/template.txt"
+	outputFile := "data/output/output.txt"
+	parsing.ParsingFromFileToFile(inputFile, outputFile, dataTicket)
 }

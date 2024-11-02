@@ -6,7 +6,7 @@ Bill            : {Ticket.PaymentDate} {Ticket.PaymentTime}
 
 #Ticket.Orders#
 #Ticket.Discounts#
-#Ticket.Serivices#
+#Ticket.Services#
 #Ticket.Taxes#
 #Ticket.Payments#
 

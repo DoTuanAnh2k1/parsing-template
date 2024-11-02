@@ -1,51 +1,39 @@
 package parsing
 
 import (
-	"fmt"
 	"parsing-template/model"
+	"parsing-template/utils"
 	"strings"
+	"time"
 )
 
-func Parsing(template string, ticket model.Ticket, date, timeStr string) string {
-	result := template
-
-	// Delete some fields
-	result = strings.ReplaceAll(result, "Tendered    :   {Payments.Name}", "")
-	result = strings.ReplaceAll(result, "Change      :   {Payments.Tendered}", "")
-	result = strings.ReplaceAll(result, "RefNo       :   {Payments.PaymentInformation!RefNo}", "")
-	result = strings.ReplaceAll(result, "Name {Orders.Name} [=FormatDecimal({Orders.Quantity},2)] [=FormatDecimal({Orders.Price},2)]", "")
-
-	// Replace simple fields of ticket
-	result = strings.ReplaceAll(result, "{Ticket.Terminal}", ticket.Terminal)
-	result = strings.ReplaceAll(result, "{LoginUser}", ticket.Cashier)
-	result = strings.ReplaceAll(result, "{Date}", date)
-	result = strings.ReplaceAll(result, "{Time}", timeStr)
-	result = strings.ReplaceAll(result, "{Ticket.PaymentDate}", ticket.PaymentDate.Format("2006-01-02"))
-	result = strings.ReplaceAll(result, "{Ticket.PaymentTime}", ticket.PaymentDate.Format("15:04:05"))
-	result = strings.ReplaceAll(result, "{Ticket.Tag!Pax}", fmt.Sprintf("%d", ticket.Tag.Pax))
-	result = strings.ReplaceAll(result, "{Tikcet.Tag|PaxTime}", ticket.Tag.PaxTime.Format("2006-01-02 15:04:05"))
-
-	// Replace Payments
-	paymentStr := ""
-	for _, payment := range ticket.Payments {
-		paymentStr += fmt.Sprintf("Tendered    :   %s\n", payment.Name)
-		paymentStr += fmt.Sprintf("Change      :   %s\n", payment.Tendered)
-		paymentStr += fmt.Sprintf("RefNo       :   %d\n", payment.PaymentInformation.RefNo)
-		paymentStr += "\n"
-	}
-	result = strings.ReplaceAll(result, "##Ticket.Payments##", paymentStr)
-
-	// Replace Orders
-	orderStr := ""
-	for _, order := range ticket.Orders {
-		orderStr += fmt.Sprintf("Name %s [%d] [%0.2f]\n", order.Name, order.Quantity, order.Price)
-	}
-	result = strings.ReplaceAll(result, "##Ticket.Orders##", orderStr)
-
-	return result
+func ParsingFromFileToFile(filePathInput, filePathOutput string, ticket model.Ticket) {
+	template := ParsingFromFile(filePathInput, ticket)
+	err := utils.WriteToFile(filePathOutput, template)
+	utils.CheckError(err)
 }
 
-// c: center
-// 10: size
-// f: full
-// j: justifier
+func ParsingFromFile(filePath string, ticket model.Ticket) string {
+	template, err := utils.ReadFromFile(filePath)
+	utils.CheckError(err)
+	return Parsing(template, ticket)
+}
+
+func ParsingToFile(filePathOutput string, template string, ticket model.Ticket) {
+	template = Parsing(template, ticket)
+	err := utils.WriteToFile(filePathOutput, template)
+	utils.CheckError(err)
+}
+
+func Parsing(template string, ticket model.Ticket) string {
+	timeNow := time.Now().Format("2006-01-02 15:04:23")
+	parts := strings.Split(timeNow, " ")
+	return ParsingWithDate(template, ticket, parts[0], parts[1])
+}
+
+func ParsingWithDate(template string, ticket model.Ticket, date, timeStr string) string {
+	template = replaceValue(ticket, template, date, timeStr)
+	template = findFormatDecimal(template)
+	template = findFormateDate(template)
+	return removeEmptyLines(template)
+}

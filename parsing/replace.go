@@ -24,7 +24,7 @@ func replaceValue(ticket model.Ticket, template string, date, timeStr string) st
 	template = strings.ReplaceAll(template, "{Tikcet.Tag|PaxTime}", ticket.Tag.PaxTime.Format("2006-01-02 15:04:05"))
 
 	// Replace Payments
-	paymentStr := ""
+	paymentStr := "##Ticket.Payments##\n"
 	for _, payment := range ticket.Payments {
 		paymentStr += fmt.Sprintf("Tendered    :   %s\n", payment.Name)
 		paymentStr += fmt.Sprintf("Change      :   %s\n", payment.Tendered)
@@ -34,7 +34,7 @@ func replaceValue(ticket model.Ticket, template string, date, timeStr string) st
 	template = strings.ReplaceAll(template, "##Ticket.Payments##", paymentStr)
 
 	// Replace Orders
-	orderStr := ""
+	orderStr := "##Ticket.Orders##\n"
 	for _, order := range ticket.Orders {
 		orderStr += fmt.Sprintf("Name %s [=FormatDecimal(%s,2)] [=FormatDecimal(%s,2)]\n", order.Name, order.Quantity, order.Price)
 	}

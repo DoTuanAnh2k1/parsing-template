@@ -51,5 +51,6 @@ func ParsingWithDate(template string, ticket model.Ticket, date, timeStr string)
 	}
 	template = findFormatDecimal(template)
 	template = findFormateDate(template)
+	template = checkOption(template)
 	return removeEmptyLines(template), nil
 }

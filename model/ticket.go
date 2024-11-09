@@ -1,20 +1,17 @@
 package model
 
-import "time"
-
 type Ticket struct {
 	Terminal    string
-	Cashier     string // Doesn't require
-	PaymentDate time.Time
+	LoginUser   string
+	PaymentDate string
+	PaymentTime string
 	PaymentType string
-	Tag         Tag
+	Tag         string
 	Payments    []Payment
 	Orders      []Order
-}
-
-type Tag struct {
-	Pax     int
-	PaxTime time.Time
+	Discounts   []Discount
+	Services    []Service
+	Taxes       []Tax
 }
 
 type Payment struct {
@@ -24,12 +21,24 @@ type Payment struct {
 }
 
 type PaymentInfo struct {
-	RefNo   int
-	RefTime time.Time
+	RefNo   string
+	RefTime string
 }
 
 type Order struct {
 	Name     string
 	Quantity string
 	Price    string
+}
+
+type Discount struct {
+	Name string
+}
+
+type Service struct {
+	Name string
+}
+
+type Tax struct {
+	Name string
 }

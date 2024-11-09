@@ -8,28 +8,25 @@ import (
 func NewTicket() Ticket {
 	return Ticket{
 		Terminal:    "Terminal",
-		Cashier:     "Chronical Do",
-		PaymentDate: time.Now(),
+		LoginUser:   "Chronical Do",
+		PaymentDate: time.Now().Format("2006-01-02"),
 		PaymentType: "cash",
-		Tag: Tag{
-			Pax:     10,
-			PaxTime: time.Now(),
-		},
+		Tag:         "{\"Pax\": \"100\", \"PaxTime\": \"2020/10/10\"}",
 		Payments: []Payment{
 			{
 				Name:     utils.StringRandom(10),
 				Tendered: utils.StringRandom(10),
 				PaymentInformation: PaymentInfo{
-					RefNo:   int(utils.IntRandom(1, 1000)),
-					RefTime: time.Now(),
+					RefNo:   "100",
+					RefTime: "2020/10/10",
 				},
 			},
 			{
 				Name:     utils.StringRandom(10),
 				Tendered: utils.StringRandom(10),
 				PaymentInformation: PaymentInfo{
-					RefNo:   int(utils.IntRandom(1, 1000)),
-					RefTime: time.Now(),
+					RefNo:   "100",
+					RefTime: "2020/10/10",
 				},
 			},
 		},
@@ -51,28 +48,25 @@ func NewTicket() Ticket {
 func NewTicketRandom() Ticket {
 	return Ticket{
 		Terminal:    utils.StringRandom(10),
-		Cashier:     utils.StringRandom(10),
-		PaymentDate: time.Now(),
+		LoginUser:   utils.StringRandom(10),
+		PaymentDate: time.Now().Format("2006-01-02"),
 		PaymentType: utils.StringRandom(10),
-		Tag: Tag{
-			Pax:     int(utils.IntRandom(1, 1000)),
-			PaxTime: time.Now(),
-		},
+		Tag:         "{\"Pax\": \"100\", \"PaxTime\": \"2020/10/10\"}",
 		Payments: []Payment{
 			{
 				Name:     utils.StringRandom(10),
 				Tendered: utils.StringRandom(10),
 				PaymentInformation: PaymentInfo{
-					RefNo:   int(utils.IntRandom(1, 1000)),
-					RefTime: time.Now(),
+					RefNo:   "100",
+					RefTime: "2020/10/10",
 				},
 			},
 			{
 				Name:     utils.StringRandom(10),
 				Tendered: utils.StringRandom(10),
 				PaymentInformation: PaymentInfo{
-					RefNo:   int(utils.IntRandom(1, 1000)),
-					RefTime: time.Now(),
+					RefNo:   "100",
+					RefTime: "2020/10/10",
 				},
 			},
 		},

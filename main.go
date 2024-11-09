@@ -9,5 +9,8 @@ func main() {
 	dataTicket := model.NewTicket()
 	inputFile := "data/template/template.txt"
 	outputFile := "data/output/output.txt"
-	parsing.ParsingFromFileToFile(inputFile, outputFile, dataTicket)
+	err := parsing.ParsingFromFileToFile(inputFile, outputFile, dataTicket)
+	if err != nil {
+		panic(err)
+	}
 }

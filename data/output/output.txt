@@ -1,6 +1,6 @@
 Terminal        : Terminal
 Cashier         :  Chronical Do
-Date            :   2024-11-12 21:53:129
+Date            :   2024-11-12 22:47:1210
 Bill            : 2024-11-12 
 [Cover:100]
 #Ticket.Orders#

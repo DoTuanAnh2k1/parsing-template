@@ -2,7 +2,7 @@ package parsing
 
 import (
 	"fmt"
-	"parsing-template/utils"
+	"github.com/DoTuanAnh2k1/parsing-template/utils"
 	"strconv"
 	"strings"
 )

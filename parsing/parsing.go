@@ -1,8 +1,8 @@
 package parsing
 
 import (
-	"parsing-template/model"
-	"parsing-template/utils"
+	"github.com/DoTuanAnh2k1/parsing-template/model"
+	"github.com/DoTuanAnh2k1/parsing-template/utils"
 	"strings"
 	"time"
 )

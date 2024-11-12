@@ -2,7 +2,7 @@ package parsing
 
 import (
 	"errors"
-	"parsing-template/utils"
+	"github.com/DoTuanAnh2k1/parsing-template/utils"
 	"regexp"
 	"strings"
 	"time"

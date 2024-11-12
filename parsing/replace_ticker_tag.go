@@ -1,7 +1,7 @@
 package parsing
 
 import (
-	"parsing-template/model"
+	"github.com/DoTuanAnh2k1/parsing-template/model"
 	"regexp"
 	"strings"
 )

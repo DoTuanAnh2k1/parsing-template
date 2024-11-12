@@ -2,7 +2,7 @@ package parsing
 
 import (
 	"fmt"
-	"parsing-template/model"
+	"github.com/DoTuanAnh2k1/parsing-template/model"
 	"strings"
 )
 
